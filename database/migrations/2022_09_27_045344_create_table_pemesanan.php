@@ -15,13 +15,15 @@ return new class extends Migration
     {
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->bigIncrements('id_pemesanan');
-            $table->unsignedBigInteger('jalur_id');
-            $table->unsignedBigInteger('daftar_pemesanan_id');
-            $table->unsignedBigInteger('user_id');
-            $table->date('tanggal_naik');
-            $table->date('tanggal_turun');
-            $table->integer('status');
-            $table->integer('total_harga');
+            $table->unsignedBigInteger('jalur_id')->nullable();
+            $table->unsignedBigInteger('kendaraan_id')->nullable();
+            $table->integer('jumlah_kendaraan')->nullable();
+            $table->unsignedBigInteger('kode')->nullable();
+            $table->date('tanggal_naik')->nullable();
+            $table->date('tanggal_turun')->nullable();
+            $table->string('status')->nullable();
+            $table->date('tanggal_masuk')->nullable();
+            $table->integer('total_harga')->nullable();
             $table->timestamps();
         });
     }

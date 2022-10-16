@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('informasi', function (Blueprint $table) {
             $table->bigIncrements('id_informasi');
-            $table->string('judul');
-            $table->string('isi');
-            $table->string('thumnail');
+            $table->string('judul')->nullable();
+            $table->string('isi')->nullable();
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }

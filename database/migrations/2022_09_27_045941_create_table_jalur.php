@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('jalur', function (Blueprint $table) {
             $table->bigIncrements('id_jalur');
-            $table->string('nama');
-            $table->string('kategori');
-            $table->string('deskripsi');
+            $table->string('nama')->nullable();
+            $table->string('kuota')->nullable();
+            $table->string('deskripsi')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_jalur');
+        Schema::dropIfExists('jalur');
     }
 };

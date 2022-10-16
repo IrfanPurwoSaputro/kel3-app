@@ -15,13 +15,19 @@ return new class extends Migration
     {
         Schema::create('anggota', function (Blueprint $table) {
             $table->bigIncrements('id_anggota');
-            $table->unsignedBigInteger('pemesanan_id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('nama');
-            $table->string('no_telpon');
-            $table->string('no_identitas');
-            $table->string('kewarganegaraan');
-            $table->string('jenis_kelamin');
+            $table->unsignedBigInteger('pemesanan_id')->nullable();
+            $table->string('nama')->nullable();
+            $table->string('kebangsaan')->nullable();
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('jenis_identitas')->nullable();
+            $table->string('no_identitas')->nullable();
+            $table->string('alamat_rumah')->nullable();
+            $table->string('provinsi')->nullable();
+            $table->string('kabupaten')->nullable();
+            $table->string('kecamatan')->nullable();
+            $table->string('kelurahan')->nullable();
+            $table->string('no_telepon')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
