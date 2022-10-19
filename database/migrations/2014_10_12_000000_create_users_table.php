@@ -25,8 +25,6 @@ return new class extends Migration
             $table->string('alamat_rumah')->nullable();
             $table->string('provinsi')->nullable();
             $table->string('kabupaten')->nullable();
-            $table->string('kecamatan')->nullable();
-            $table->string('kelurahan')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->nullable();
