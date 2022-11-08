@@ -198,4 +198,9 @@ class HomeController extends Controller
     {
         return view('pengguna.pemesanan.index');
     }
+
+    public function booking_form()
+    {
+        return view('pengguna.pemesanan.booking_form');
+    }
 }

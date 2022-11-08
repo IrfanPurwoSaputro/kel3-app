@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('pemesanan', function (Blueprint $table) {
             $table->bigIncrements('id_pemesanan');
             $table->unsignedBigInteger('jalur_id')->nullable();
-            $table->unsignedBigInteger('kendaraan_id')->nullable();
-            $table->integer('jumlah_kendaraan')->nullable();
+            // $table->unsignedBigInteger('kendaraan_id')->nullable();
+            // $table->integer('jumlah_kendaraan')->nullable();
             $table->unsignedBigInteger('kode')->nullable();
             $table->date('tanggal_naik')->nullable();
             $table->date('tanggal_turun')->nullable();

@@ -19,8 +19,8 @@
                                     <p>Gunung Lawu terletak di Pulau Jawa, Indonesia, tepatnya di perbatasan Provinsi Jawa
                                         Tengah dan Jawa Timur. Gunung Lawu terletak di antara tiga kabupaten yaitu Kabupaten
                                         Karanganyar, Jawa Tengah, Kabupaten Ngawi, dan Kabupaten Magetan, Jawa Timur.</p>
-                                    <a class="btn btn-lg btn-primary" href="#" role="button">Masuk</a>
-                                    <a class="btn btn-lg btn-primary" href="about.html" role="button">Registrasi</a>
+                                    {{-- <a class="btn btn-lg btn-primary" href="#" role="button">Masuk</a> --}}
+                                    <a class="btn btn-lg btn-primary" href="/booking" role="button">Registrasi</a>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -39,8 +39,8 @@
                                     <h1><strong class="color">Kemudahan</strong></h1>
                                     <p>Pada website ini sudah dilengkapi dengan tata cara pemesanan tiket dan juga informasi
                                         mengenai jalur yang bisa dilewati oleh para pendaki</p>
-                                    <a class="btn btn-lg btn-primary" href="#" role="button">Masuk</a>
-                                    <a class="btn btn-lg btn-primary" href="about.html" role="button">Registrasi</a>
+                                    {{-- <a class="btn btn-lg btn-primary" href="#" role="button">Masuk</a> --}}
+                                    <a class="btn btn-lg btn-primary" href="/booking" role="button">Registrasi</a>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -59,8 +59,8 @@
                                     <h1><strong class="color">Pengaduan</strong></h1>
                                     <p>Website ini juga dilengkapi halaman pengaduan, sehingga kami bisa terus memperbarui
                                         sistem sesuai kebutuhan para pendaki</p>
-                                    <a class="btn btn-lg btn-primary" href="#" role="button">Masuk</a>
-                                    <a class="btn btn-lg btn-primary" href="about.html" role="button">Registrasi</a>
+                                    {{-- <a class="btn btn-lg btn-primary" href="#" role="button">Masuk</a> --}}
+                                    <a class="btn btn-lg btn-primary" href="/booking" role="button">Registrasi</a>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,6 +32,12 @@ Route::get('/detail_informasi/{slug}', [HomeController::class, 'detail_informasi
 Route::get('/contact', [HomeController::class, 'contact']);
 
 Route::get('/booking', [HomeController::class, 'booking']);
+
+Route::get('/booking_form', [OrderController::class, 'index']);
+
+Route::post('/store_prov', [OrderController::class,'store_provinces']);
+
+Route::post('/booking_form/store', [OrderController::class,'store']);
 
 Route::get('/admin', [AdminController::class, 'index']);
 

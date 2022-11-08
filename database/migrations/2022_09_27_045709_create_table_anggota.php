@@ -17,8 +17,9 @@ return new class extends Migration
             $table->bigIncrements('id_anggota');
             $table->unsignedBigInteger('pemesanan_id')->nullable();
             $table->string('nama')->nullable();
-            $table->string('kebangsaan')->nullable();
+            // $table->string('kebangsaan')->nullable();
             $table->string('jenis_kelamin')->nullable();
+            $table->date('tanggal_Lahir')->nullable();
             $table->string('jenis_identitas')->nullable();
             $table->string('no_identitas')->nullable();
             $table->string('alamat_rumah')->nullable();
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->string('kabupaten')->nullable();
             $table->string('no_telepon')->nullable();
             $table->string('email')->nullable();
+            $table->string('surat_sehat')->nullable();
             $table->timestamps();
         });
     }

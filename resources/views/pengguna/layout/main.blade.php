@@ -13,6 +13,8 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="content">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <!-- style css -->
@@ -38,6 +40,8 @@
         }
 
     </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -72,7 +76,7 @@
 
     <div id="plant" class="footer layout_padding">
         <div class="container">
-            <p>@2022 TSA WEB B Kel 3 Design by<a href="https://html.design/"> Free Html Templates</a></p>
+            <p>@2022 TSA WEB B Kel 3</p>
         </div>
     </div>
     {{-- endfooter --}}

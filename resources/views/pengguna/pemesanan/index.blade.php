@@ -117,9 +117,102 @@
                       </div>
                   </div>
               </div>
+
+        <form action="{{ url('booking_form') }}">
+            <div class="col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>CHECKLIST PERSETUJUAN</strong>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>
+                                <div class="input-group ">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">
+                                        <input type="checkbox" name="option_1" id="option_1" onclick="terms_changed()">
+                                      </div>
+                                    </div>
+                                    <strong class="form-control">Menunjukkan Bukti Booking Online dengan Scan QRcode di pintu masuk (melalui Hp atau bukti cetak booking online).</strong>
+                                  </div>                                  
+                            </li>
+                            <li>
+                                <div class="input-group ">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">
+                                        <input type="checkbox" name="option_2" id="option_2" onclick="terms_changed()">
+                                      </div>
+                                    </div>
+                                    <strong class="form-control">Membawa Fotocopy KTP/KTM/ dan Paspor yang masih berlaku.</strong>
+                                  </div>                                  
+                            </li>
+                            <li>
+                                <div class="input-group ">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">
+                                        <input type="checkbox" name="option_3" id="option_3" onclick="terms_changed()">
+                                      </div>
+                                    </div>
+                                    <strong class="form-control">Mematuhi SOP Kunjungan  dan aturan pada masa Pandemi Covid (Menerapkan Protokol Kesehatan Ketat).</strong>
+                                  </div>                                  
+                            </li>
+                            <li>
+                                <div class="input-group ">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">
+                                        <input type="checkbox" name="option_4" id="option_4" onclick="terms_changed()">
+                                      </div>
+                                    </div>
+                                    <strong class="form-control">Menggunakan aplikasi Peduli Lindungi untuk cek status vaksin.</strong>
+                                  </div>                                  
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            {{-- <div class="col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>PERSETUJUAN</strong>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-danger">Segala persyaratan yang diisi wajib dipertanggungjawabkan, jika tidak sesuai/tidak lengkap tidak diberikan ijin 
+                            melakukan wisata bromo, dan uang yang sudah ditransfer tidak dapat diambil kembali.
+                        </p>
+                    </div>
+                </div>
+            </div> --}}
+
+            <div class="col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <i>Anda memahami, menyetujui, syarat dan ketentuan-ketentuan di atas, silakan isi checklist persyaratan diatas dan klik button daftar.</i>
+                    </div>
+                    <div class="d-flex justify-content-center card-body">
+                        {{-- <button class="btn btn-primary" type="submit" id="submit_button" onclick="location.href='{{ url('booking_form') }}'" disabled>Daftar</button> --}}
+                        <input type="submit" value="Daftar" id="submit_button" class="btn btn-primary" disabled>
+                    </div>
+                </div>
+            </div>
+        </form>
             </div>
         </div>
     </div>
+
+   <script>
+        var opt1 = document.getElementById("option_1");
+        var opt2 = document.getElementById("option_2");
+        var opt3 = document.getElementById("option_3");
+        var opt4 = document.getElementById("option_4");
+        function terms_changed(){
+            if(opt1.checked && opt2.checked && opt3.checked && opt4.checked){
+                document.getElementById("submit_button").disabled = false;
+            } else{
+                document.getElementById("submit_button").disabled = true;
+            }
+        }
+   </script>
 
     <!-- end plant -->
 @endsection
