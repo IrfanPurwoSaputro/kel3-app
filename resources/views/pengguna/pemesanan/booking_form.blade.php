@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="container">
-            <form id="data_form" action="/booking_form/store" method="POST" enctype="multipart/form-data">
-                @crsf
+            <form method="POST" action="{{ route('booking.store') }}" enctype="multipart/form-data" id="data_form">
+                @csrf
                 <div class="row">
                     <div class="col-md-12 mb-4">
                         <div class="card">
@@ -21,20 +21,20 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Jalur Pendakian</label>
-                                    <select class="form-control" style="height: 50px" name="jalur_pendakian">
-                                        <option value="option_select" disabled selected>Pilih Jalur Pendakian</option>
+                                    <label for="jalur_pendakian">Jalur Pendakian</label>
+                                    <select class="form-control" style="height: 50px" name="jalur_pendakian" id="jalur_pendakian">
+                                        <option value=" " disabled selected>Pilih Jalur Pendakian</option>
                                         @foreach($jalur as $jl)
-                                            <option value="{{ $jl->id }}">{{ $jl->nama}}</option>
+                                            <option value="{{ $jl->id_jalur }}">{{ $jl->nama}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Tanggal Berangkat</label>
+                                    <label for="tanggal_naik">Tanggal Berangkat</label>
                                     <input type="date" class="date form-control" name="tanggal_naik" id="tanggal_naik">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Tanggal Pulang</label>
+                                    <label for="tanggal_turun">Tanggal Pulang</label>
                                     <input type="date" class="date form-control" name="tanggal_turun" id="tanggal_turun">
                                 </div>
                                 {{-- <div class="form-group">
@@ -68,8 +68,9 @@
                                 <div class="form-group">
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
                                     <select class="form-control" style="height: 50px" name="jenis_kelamin" id="jenis_kelamin">
-                                        <option>Laki - Laki</option>
-                                        <option>Perempuan</option>
+                                        <option value="" selected>Pilih jenis kelamin</option>
+                                        <option value="Laki-laki">Laki - Laki</option>
+                                        <option value="Perempuan">Perempuan</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -145,7 +146,7 @@
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-center">
-                                    <input type="button" class="btn btn-info" value="Tambah Anggota" data-toggle="modal" data-target="#anggotaModal">   
+                                    <input type="button" class="btn btn-info" value="Tambah Anggota" data-toggle="modal" data-target="#anggotaModal" id="modal_anggota" disabled>   
                                 </div>
                             </div>
                         </div>
@@ -159,6 +160,7 @@
                                 <div class="form-group">
                                     <label>Pilih Bank Tujuan</label>
                                     <select class="form-control" style="height: 50px" name="pembayaran" id="pembayaran">
+                                        <option value=" " disabled selected>Pilih Pembayaran</option>
                                         <option value="BRI">Bank BRI</option>
                                         <option value="BNI">Bank BNI</option>
                                         <option value="BCA">Bank BCA</option>
@@ -173,18 +175,20 @@
                                 <strong>Konfirmasi Booking</strong>
                             </div>
                             <div class="card-body">
-                            <p class="text-secondary" style="font-weight:bold">Dengan menekan tombol Kirim dibawah ini, maka Anda menyetujui segala Persyaratan dan Kebijakan TN Bromo Tengger Semeru.</p>
-                            <div>
+                                <p class="text-secondary" style="font-weight:bold">Dengan menekan tombol Kirim dibawah ini, maka Anda menyetujui segala Persyaratan dan Kebijakan TN Bromo Tengger Semeru.</p>
+                                <div>
                                     <p>Rincian Booking online anda terdiri dari :</p>
                                     {{-- <p style="font-weight:bold">29 Oktober 2022</p> --}}
                                     
                                     <p style="display: inline" id="orang">0</p>Orang x Rp. 25.000
                                     <p class="text-warning" style="font-weight:bold" style="display: inline">TOTAL Rp.</p> <p id="hasil" class="text-warning" style="font-weight:bold" style="display: inline">0</p>
                                     <div style="padding: 15px 0 0 0; text-align: left;" class="ml-3">
-                                        <input type="submit" name="btn-booking-submit" class="btn btn-warning" value="Kirim" style="width: 150px;">
+                                        <input type="submit" name="submit" class="btn btn-warning" value="Kirim" style="width: 150px;">
                                     </div>
+                                </div>
                             </div>
-                            </div>
+
+                            <input type="hidden" name="total_harga" id="total_harga">
                         </div>
                     </div>
                 </div>
@@ -299,25 +303,31 @@
                 var hasil = (orang * 25000);
                 $('#orang').text(orang);
                 $('#hasil').text(hasil);
+                $('#total_harga').val(hasil);
+                $('#modal_anggota').prop('disabled', false);
             });
 
             $('#userEntry').on('submit', function(e) {
                 e.preventDefault();
 
                 const rows = [];
+                const data = [];
                 $.each($(this).serializeArray(), function(i, field) {
                     if (i > 0 && field.name === rows[rows.length - 1].name) {
                         rows[rows.length - 1].value += ';' + field.value; 
                     } else {
                         rows.push(field);
-                        $("#data_form").append('<input type="hidden" name="' + field.name + '" value="' + field.value + '">');
+                        // $("#data_form").append('<input type="hidden" name="' + field.name + '" value="' + field.value + '">');
                     }
                 });
+                // data.push(rows);
+                // console.log(data);      
 
                 let list = '<tr>';
                 $.each(rows, function(i, field) {
+                    list += '<input type="hidden" name="userEntry[' + String(counter) + '][' + field.name + ']" value="' + field.value + '"/>';
                     if (field.name != "modal_provinsi" && field.name != "modal_kabupaten") {
-                        list += '<td>' + field.val  ue + '<input type="hidden" name="userEntry[' + String(counter) + '][' + field.name + ']" value="' + field.value + '"/>' + '</td>';
+                        list += '<td>' + field.value + '</td>';
                     }
                 });
 
@@ -341,12 +351,14 @@
                     $('#orang').text(jum_orang);
                     var total = (jum_orang*25000);
                     $('#hasil').text(total);
+                    $('#total_harga').val() = total;
                 });
                 var total =  (jum_orang*25000);
                 $('#hasil').text(total);
+                $('#total_harga').val(total);
                 $(this)[0].reset();
             });
-
+            
             $(function(){
                 var dtToday = new Date();
                 
@@ -412,9 +424,6 @@
                         $.each(result.cities, function (key, value) {
                             $("#kabupaten").append('<option value="' + value.id + '">' + value.name + '</option>');
                         });
-
-                    // $('#kabupaten').html('<option value="">-- Select City --</option>');
-
                     }
                 });    
             });

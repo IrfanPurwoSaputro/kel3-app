@@ -28,16 +28,17 @@ Route::get('/about', [HomeController::class, 'about']);
 
 Route::get('/detail_informasi/{slug}', [HomeController::class, 'detail_informasi']);
 
-
 Route::get('/contact', [HomeController::class, 'contact']);
 
-Route::get('/booking', [HomeController::class, 'booking']);
+// Route::get('/booking', [HomeController::class, 'booking']);
 
-Route::get('/booking_form', [OrderController::class, 'index']);
+Route::resource('booking', OrderController::class);
 
 Route::post('/store_prov', [OrderController::class,'store_provinces']);
 
-Route::post('/booking_form/store', [OrderController::class,'store']);
+Route::get('/payment', [OrderController::class,'payment']);
+
+// Route::post('/add_data_booking', [OrderController::class,'store']);
 
 Route::get('/admin', [AdminController::class, 'index']);
 

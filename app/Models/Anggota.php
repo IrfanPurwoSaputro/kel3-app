@@ -12,5 +12,5 @@ class Anggota extends Model
     protected $table = 'anggota';
     protected $primaryKey = 'id_anggota';
     protected $fillable = ['pemesanan_id', 'nama', 'jenis_kelamin', 'tanggal_lahir', 'jenis_identitas', 'no_identitas', 
-    'alamat_rumah', 'provinsi', 'kabupaten', 'no_telepon', 'email', 'surat_sehat', 'created_at'];
+    'alamat_rumah', 'provinsi_id', 'kabupaten_id', 'no_telepon', 'email', 'surat_sehat', 'created_at'];
 }

@@ -118,7 +118,7 @@
                   </div>
               </div>
 
-        <form action="{{ url('booking_form') }}">
+        <form action="{{ route('booking.create') }}">
             <div class="col-md-12 mb-4">
                 <div class="card">
                     <div class="card-header">
