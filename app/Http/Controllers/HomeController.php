@@ -49,7 +49,6 @@ class HomeController extends Controller
                 "active" => ""
                 ]
             ];
-            // dd($data);
             return view('pengguna.home.index', [
                 "jalurs" => $data,
             ]);
