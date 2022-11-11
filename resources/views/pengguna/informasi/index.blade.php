@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="container">
-            <div class="row justify-content-center mb-5">
+            {{-- <div class="row justify-content-center mb-5">
                 <div class="col-md-8">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control"
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="container">
             <div class="row">

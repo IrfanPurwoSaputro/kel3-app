@@ -11,4 +11,14 @@ class Cities extends Model
 
     protected $table = 'indonesia_cities';
     protected $primaryKey = 'id';
+
+    public function anggota()
+    {
+        return $this->hasMany(Anggota::class);
+    }
+
+    public function provinsi()
+    {
+        return $this->belongsTo(Province::class, 'province_code');
+    }
 }

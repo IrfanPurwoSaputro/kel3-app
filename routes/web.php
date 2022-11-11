@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PengaduanController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -28,11 +29,14 @@ Route::get('/about', [HomeController::class, 'about']);
 
 Route::get('/detail_informasi/{slug}', [HomeController::class, 'detail_informasi']);
 
-Route::get('/contact', [HomeController::class, 'contact']);
 
 // Route::get('/booking', [HomeController::class, 'booking']);
 
 Route::resource('booking', OrderController::class);
+
+Route::get('/find_code', [OrderController::class,'find_code']);
+
+Route::resource('pengaduan', PengaduanController::class);
 
 Route::post('/store_prov', [OrderController::class,'store_provinces']);
 

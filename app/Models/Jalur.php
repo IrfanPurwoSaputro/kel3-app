@@ -11,4 +11,9 @@ class Jalur extends Model
 
     protected $table = 'jalur';
     protected $primaryKey = 'id_jalur';
+
+    public function pemesanan()
+    {
+        return $this->hasMany(Pemesanan::class);
+    }
 }

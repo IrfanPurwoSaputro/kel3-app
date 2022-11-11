@@ -11,4 +11,14 @@ class Provinces extends Model
 
     protected $table = 'indonesia_provinces';
     protected $primaryKey = 'id';
+
+    public function anggota()
+    {
+        return $this->hasMany(Anggota::class);
+    }
+
+    public function cities()
+    {
+        return $this->hasMany(Cities::class);
+    }
 }

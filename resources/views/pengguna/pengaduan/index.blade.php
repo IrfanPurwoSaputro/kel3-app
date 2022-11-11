@@ -19,23 +19,22 @@
             <div class="row pb-5 justify-content-center">
                 <div class="col-md-9">
                     <div class="email_btn">
-                        <form action="/action_page.php">
+                        <form method="POST" action="{{ route('pengaduan.store') }}">
+                            @csrf
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-sm" placeholder="Name" name="Name">
+                                <input type="text" style="color: black" class="form-control form-control-sm" placeholder="Nama" name="nama">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-sm" placeholder="Email" name="Email">
+                                <input type="text" style="color: black" class="form-control form-control-sm" placeholder="Phone" name="no_telepon">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-sm" placeholder="Phone" name="Phone">
+                                <input type="text" style="color: black" class="form-control form-control-sm" placeholder="Kode Booking(Opsional)" name="kode">
                             </div>
                             <div class="form-group">
-                                <textarea type="text" class="form-control form-control-sm" placeholder="Massage"
-                                    name="text3"></textarea>
+                                <textarea type="text" style="color: black" class="form-control form-control-sm" placeholder="Pesan" name="pesan"></textarea>
                             </div>
                             <div class="submit_btn">
-                                <button type="submit" class="btn btn-primary"
-                                    style="background: #081b30; color: #fff; padding: 11px;">Send</button>
+                                <input type="submit" name="submit" class="btn btn-warning" value="Kirim" style="width: 150px;">
                             </div>
                         </form>
                     </div>

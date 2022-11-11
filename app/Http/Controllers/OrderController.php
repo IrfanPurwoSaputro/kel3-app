@@ -205,4 +205,13 @@ class OrderController extends Controller
         //
     }
 
+
+    public function find_code(Request $request){
+		$cari = $request->cari;
+ 
+        $hasil = Pemesanan::where('kode','=', $cari)->get();
+
+        // mengirim data pegawai ke view index
+        return view('pengguna.pemesanan.find_code', compact('hasil'));
+    }
 }
