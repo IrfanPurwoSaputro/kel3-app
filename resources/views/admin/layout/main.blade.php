@@ -35,7 +35,7 @@
   <script src="{{ asset('vendors/datatables.net/jquery.dataTables.js') }}"></script>
   <script src="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
   <script src="{{ asset('js/admin/dataTables.select.min.js') }}"></script>
-
+  @yield('script')
   <!-- End plugin js for this page -->
   <!-- inject:js -->
   <script src="{{ asset('js/admin/off-canvas.js') }}"></script>

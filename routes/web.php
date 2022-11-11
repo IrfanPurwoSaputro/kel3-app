@@ -5,7 +5,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\PengaduanController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -30,8 +29,6 @@ Route::get('/about', [HomeController::class, 'about']);
 Route::get('/detail_informasi/{slug}', [HomeController::class, 'detail_informasi']);
 
 
-// Route::get('/booking', [HomeController::class, 'booking']);
-
 Route::resource('booking', OrderController::class);
 
 Route::get('/find_code', [OrderController::class,'find_code']);
@@ -42,34 +39,46 @@ Route::post('/store_prov', [OrderController::class,'store_provinces']);
 
 Route::get('/payment', [OrderController::class,'payment']);
 
-// Route::post('/add_data_booking', [OrderController::class,'store']);
 
-Route::get('/admin', [AdminController::class, 'index']);
 
-Route::get('/admin/charts', [PageController::class, 'charts']);
+Route::get('/template/charts', [PageController::class, 'charts']);
 
-Route::get('/admin/documentation', [PageController::class, 'documentation']);
+Route::get('/template/documentation', [PageController::class, 'documentation']);
 
-Route::get('/admin/basic_elements', [PageController::class, 'basic_elements']);
+Route::get('/template/basic_elements', [PageController::class, 'basic_elements']);
 
-Route::get('/admin/mdi', [PageController::class, 'mdi']);
+Route::get('/template/mdi', [PageController::class, 'mdi']);
 
-Route::get('/admin/error_404', [PageController::class, 'error_404']);
+Route::get('/template/error_404', [PageController::class, 'error_404']);
 
-Route::get('/admin/error_500', [PageController::class, 'error_500']);
+Route::get('/template/error_500', [PageController::class, 'error_500']);
 
-Route::get('/admin/login', [PageController::class, 'login']);
+Route::get('/template/basic_table', [PageController::class, 'basic_table']);
 
-Route::get('/admin/register', [PageController::class, 'register']);
+Route::get('/template/buttons', [PageController::class, 'buttons']);
 
-Route::get('/admin/basic_table', [PageController::class, 'basic_table']);
+Route::get('/template/dropdowns', [PageController::class, 'dropdowns']);
 
-Route::get('/admin/buttons', [PageController::class, 'buttons']);
+Route::get('/template/typhography', [PageController::class, 'typhography']);
 
-Route::get('/admin/dropdowns', [PageController::class, 'dropdowns']);
 
-Route::get('/admin/typhography', [PageController::class, 'typhography']);
-
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+|
+*/
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/booking_list', [AdminController::class, 'bookingTiketList']);
+Route::get('/booking_list_detail/{id}', [AdminController::class, 'getDetailBooking']);
+Route::get('/booking_list_update/{id}', [AdminController::class, 'updateStatusBooking']);
+Route::get('/admin_suhu_ngawi_get', [AdminController::class, 'getCuacaCelciusBmkg']);
+Route::get('/admin/login', [PageController::class, 'login']);
+Route::post('/admin/login', [LoginController::class, 'LoginManual']);
+/*
+|--------------------------------------------------------------------------
+| End Admin Routes
+|--------------------------------------------------------------------------
+|
+*/
