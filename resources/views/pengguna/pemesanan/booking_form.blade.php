@@ -217,7 +217,7 @@
                         <div class="form-group">
                             <label>Jenis Kelamin</label>
                             <select class="form-control" style="height: 50px" name="modal_jenis_kelamin" id="modal_jenis_kelamin">
-                                <option value="laki-laki">Laki - Laki</option>
+                                <option value="Laki-laki">Laki - Laki</option>
                                 <option value="perempuan">Perempuan</option>
                             </select>
                         </div>

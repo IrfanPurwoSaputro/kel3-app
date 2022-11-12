@@ -11,5 +11,5 @@ class Pengaduan extends Model
 
     protected $table = 'pengaduan';
     protected $primaryKey = 'id_pengaduan';
-    protected $fillable = ['jalur_id', 'kode', 'nama', 'no_telepon', 'pesan'];
+    protected $fillable = ['kode', 'nama', 'no_telepon', 'pesan'];
 }

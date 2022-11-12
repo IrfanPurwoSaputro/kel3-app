@@ -20,6 +20,14 @@
                         <div class="card-body">
                             <table class="table" id="userList">
                                 @foreach($hasil as $hl)
+                                @if($hasil == null)
+                                <thead>
+                                    <th scope="col">
+                                        <h4>Kode Booking Salah</h4>
+                                        <p>Data tidak dtemukan</p>
+                                    </th>
+                                </thead>
+                                @else
                                 <thead>
                                     <th scope="col">Status</th>
                                     {{-- <th scope="col">Kebangsaan</th> --}}
@@ -27,7 +35,7 @@
                                 </thead>
                                 <thead>
                                     <th scope="col">Bank Tujuan</th>
-                                    {{-- <th scope="col">Kebangsaan</th> --}}
+                                    {{-- <th scope="col">Kebangs    aan</th> --}}
                                     <th scope="col">: Bank {{ $hl->pembayaran }}</th>
                                 </thead>
                                 <thead>
@@ -45,6 +53,7 @@
                                     {{-- <th scope="col">Kebangsaan</th> --}}
                                     <th scope="col">: Rp. {{ $hl->total_harga }}</th>
                                 </thead>
+                                @endif
                                 @endforeach
                             </table>
                         </div>
