@@ -14,6 +14,13 @@
       </a>
     </li>
 
+    <li class="nav-item {{Request::segment(1) === 'informasi_list'?'active':''}}">
+      <a class="nav-link" href="{{url('informasi_list')}}">
+         <i class="fa fa-book"></i>&nbsp;&nbsp;
+        <span class="menu-title">Informasi</span>
+      </a>
+    </li>
+
      <li class="nav-item {{Request::segment(1) === 'pengaduan_list'?'active':''}}">
       <a class="nav-link" href="{{url('pengaduan_list')}}">
          <i class="fa fa-users"></i>&nbsp;&nbsp;

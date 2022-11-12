@@ -74,6 +74,12 @@ Route::get('/template/typhography', [PageController::class, 'typhography']);
 */
 Auth::routes();
 Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/informasi_list', [AdminController::class, 'informasiList']);
+Route::get('/informasi_create', [AdminController::class, 'createInformasi']);
+Route::get('/informasi_edit/{id}', [AdminController::class, 'editInformasi']);
+Route::post('/informasi_store', [AdminController::class, 'storeInformasi']);
+Route::post('/informasi_update/{id}', [AdminController::class, 'updateInformasi']);
+Route::get('/informasi_delete/{id}', [AdminController::class, 'deleteInformasi']);
 Route::get('/pengaduan_list', [AdminController::class, 'pengaduanIndex']);
 Route::get('/booking_list', [AdminController::class, 'bookingTiketList']);
 Route::get('/booking_list_detail/{id}', [AdminController::class, 'getDetailBooking']);
