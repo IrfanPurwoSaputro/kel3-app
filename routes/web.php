@@ -5,7 +5,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -70,6 +74,7 @@ Route::get('/template/typhography', [PageController::class, 'typhography']);
 */
 Auth::routes();
 Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/pengaduan_list', [AdminController::class, 'pengaduanIndex']);
 Route::get('/booking_list', [AdminController::class, 'bookingTiketList']);
 Route::get('/booking_list_detail/{id}', [AdminController::class, 'getDetailBooking']);
 Route::get('/booking_list_update/{id}', [AdminController::class, 'updateStatusBooking']);

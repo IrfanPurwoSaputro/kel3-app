@@ -74,7 +74,9 @@ class AdminController extends Controller
                 {
                     $get->where('pms.kode',$request->filter);
                 }
+                $get->where('aga.email','!=',NULL);
                 $get->select('pms.*','aga.nama as nama_anggota','jur.nama as nama_jalur');
+                $get->groupBy('pms.kode');
                 $get->orderBy('pms.created_at','DESC');
                 $data = $get->paginate(10);
         //return $data;
@@ -95,7 +97,7 @@ class AdminController extends Controller
                 $get->join('jalur as jur','jur.id_jalur','=','pms.jalur_id');
                 $get->join('indonesia_provinces as ip','ip.id','=','aga.provinsi_id');
                 $get->join('indonesia_cities as ics','ics.id','=','aga.kabupaten_id');
-                $get->where('pms.id_pemesanan',$id);
+                $get->where('pms.kode',$id);
                 $get->select('pms.*'
                             ,'aga.nama as nama_anggota','aga.kebangsaan','aga.jenis_kelamin'
                             ,'aga.tanggal_lahir','aga.jenis_identitas','aga.no_identitas','aga.alamat_rumah'
@@ -105,41 +107,80 @@ class AdminController extends Controller
                             );
                 $get->orderBy('pms.created_at','DESC');
                 $data = $get->first();
-        if($data->status == 'belum dibayar'){
-            $status = '<a class="badge badge-danger btn-sm">'.str_replace('_',' ',ucwords($data->status)).'</a>';
-        }else{
-            $status = '<a class="badge badge-success btn-sm">'.str_replace('_',' ',ucwords($data->status)).'</a>';
+                $html = '';
+                $bodyOne = '';
+                $bodyTwo = '';
+        if ($data) {
+            
+            if($data->status == 'belum dibayar'){
+                $status = '<a class="badge badge-danger btn-sm">'.str_replace('_',' ',ucwords($data->status)).'</a>';
+            }else{
+                $status = '<a class="badge badge-success btn-sm">'.str_replace('_',' ',ucwords($data->status)).'</a>';
+            }
+
+            $listAnggota = DB::table('anggota as aga')
+                            ->join('indonesia_provinces as ip','ip.id','=','aga.provinsi_id')
+                            ->join('indonesia_cities as ics','ics.id','=','aga.kabupaten_id')
+                            ->select('aga.nama as nama_anggota','aga.kebangsaan','aga.jenis_kelamin'
+                            ,'aga.tanggal_lahir','aga.jenis_identitas','aga.no_identitas','aga.alamat_rumah'
+                            ,'aga.no_telepon','aga.email'
+                            ,'ip.name as nama_provinsi','ics.name as nama_kabupaten')
+                            ->where('aga.pemesanan_id',$data->id_pemesanan)
+                            ->get();
+           // $statusAnggota = 'Anggota';
+            foreach ($listAnggota as $key => $aga) {
+                if($aga->email != NULL)
+                {
+                    $statusAnggota = 'Ketua';
+                }else{
+                    $statusAnggota = 'Anggota';
+                }
+                $bodyTwo .= '<div class="col-md-12">';
+                $bodyTwo .= '<p align="center"><b>Detail Anggota</b></p>
+                            <p>Nama Anggota : '.$aga->nama_anggota.' ( <b>'.$statusAnggota.' </b>)</p>
+                            <p>Kebangsaan : '.$aga->kebangsaan.'</p>
+                            <p>Asal : '.$aga->nama_provinsi.' '.$aga->nama_kabupaten.'</p>
+                            <p>Tanggal Lahir : '.Carbon::parse($aga->tanggal_lahir)->format('d F Y').'</p>
+                            <p>Jenis Identitas : '.$aga->jenis_identitas.'</p>
+                            <p>No Identitas : '.$aga->no_identitas.'</p>
+                            <p>Alamat  : '.$aga->alamat_rumah.'</p>
+                            <p>Email  : '.$aga->email.'</p>
+                            <p>No Telepon  : '.$aga->no_telepon.'</p>';
+                $bodyTwo .= '</div>';
+            }
+            
+            //appending html
+            $html .= '<div class="row">';
+            $bodyOne .= '<div class="col-md-12">';
+            $bodyOne .= '<p align="center"><b>Detail Pemesanan</b></p>
+                         <p>Jalur Pendakian : '.$data->nama_jalur.' <br> '.$data->deskripsi.'</p>
+                         <p>Tanggal Naik : '.Carbon::parse($data->tanggal_naik)->format('d F Y').'</p>
+                         <p>Tanggal Turun : '.Carbon::parse($data->tanggal_turun)->format('d F Y').'</p>
+                         <p>Tanggal Booking : '.Carbon::parse($data->created_at)->format('d F Y').'</p>
+                         <p>Grand Total : '.number_format($data->total_harga, 0, ",", ".").'</p>
+                         <p>Metode Pembayaran : '.$data->pembayaran.'</p>
+                         <p>Status Booking : '.$status.'</p>';
+            $bodyOne .= '</div>';
+            $html .= $bodyOne;
+            $html .= $bodyTwo;
+            $html .= '</div>';
         }
-        $html = '<div class="row">';
-        $bodyOne = '<div class="col-md-6">';
-        $bodyTwo = '<div class="col-md-6">';
+       
+       
+        return response()->json(['html'=>$html,'data'=>$data]);
+    }
 
-        $bodyOne .= '<p align="center"><b>Detail Pemesanan</b></p>
-                     <p>Jalur Pendakian : '.$data->nama_jalur.' <br> '.$data->deskripsi.'</p>
-                     <p>Tanggal Naik : '.Carbon::parse($data->tanggal_naik)->format('d F Y').'</p>
-                     <p>Tanggal Turun : '.Carbon::parse($data->tanggal_turun)->format('d F Y').'</p>
-                     <p>Tanggal Booking : '.Carbon::parse($data->created_at)->format('d F Y').'</p>
-                     <p>Grand Total : '.number_format($data->total_harga, 0, ",", ".").'</p>
-                     <p>Metode Pembayaran : '.$data->pembayaran.'</p>
-                     <p>Status Booking : '.$status.'</p>';
-
-        $bodyTwo .= '<p align="center"><b>Detail Anggota</b></p>
-                     <p>Nama Anggota : '.$data->nama_anggota.'</p>
-                     <p>Kebangsaan : '.$data->kebangsaan.'</p>
-                     <p>Asal : '.$data->nama_provinsi.' '.$data->nama_kabupaten.'</p>
-                     <p>Tanggal Lahir : '.Carbon::parse($data->tanggal_lahir)->format('d F Y').'</p>
-                     <p>Jenis Identitas : '.$data->jenis_identitas.'</p>
-                     <p>No Identitas : '.$data->no_identitas.'</p>
-                     <p>Alamat  : '.$data->alamat_rumah.'</p>
-                     <p>Email  : '.$data->email.'</p>
-                     <p>No Telepon  : '.$data->no_telepon.'</p>';
-
-        $bodyOne .= '</div>';
-        $bodyTwo .= '</div>';
-        $html .= $bodyOne;
-        $html .= $bodyTwo;
-        $html .= '</div>';
-        return response()->json($html);
+    public function pengaduanIndex(Request $request)
+    {
+        $get = DB::table('pengaduan');
+            if($request->filter != null)
+            {
+                //dd($request->all());
+                $get->where('nama', 'like', '%' . $request->filter .'%');
+                $get->orWhere('kode', 'like', '%' . $request->filter .'%');
+            }     
+        $data = $get->paginate(10); // select * from pengaduan;
+        return view('admin.pengaduan',compact('data','request'));
     }
 
 }

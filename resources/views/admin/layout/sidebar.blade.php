@@ -14,8 +14,8 @@
       </a>
     </li>
 
-     <li class="nav-item {{Request::segment(1) === 'pengaduan' && Request::segment(2) === 'list'?'active':''}}">
-      <a class="nav-link" href="#" onclick="return alert('Under development!')">
+     <li class="nav-item {{Request::segment(1) === 'pengaduan_list'?'active':''}}">
+      <a class="nav-link" href="{{url('pengaduan_list')}}">
          <i class="fa fa-users"></i>&nbsp;&nbsp;
         <span class="menu-title">Pengaduan</span>
       </a>
