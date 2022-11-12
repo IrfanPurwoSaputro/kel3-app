@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DB;
+use Auth;
 class AdminController extends Controller
 {
     public function __construct()
@@ -14,8 +15,16 @@ class AdminController extends Controller
 
     public function index()
     {
-        
-        return view('admin.index');
+        if(Auth::user()->role == 'petugas')
+        {
+            return redirect('booking_list');
+        }
+        $today = Carbon::now('Asia/Jakarta')->format('Y-m-d');
+        $bookingToday = DB::table('pemesanan')->where('tanggal_naik',$today)->count();
+        $bookingAll = DB::table('pemesanan')->count();
+        $anggota = DB::table('anggota')->count();
+        $pengaduan = DB::table('pengaduan')->count();
+        return view('admin.index',compact('bookingToday','bookingAll','anggota','pengaduan'));
     }
 
     public function getCuacaCelciusBmkg()
@@ -91,7 +100,7 @@ class AdminController extends Controller
                 $get->select('pms.*','aga.nama as nama_anggota','jur.nama as nama_jalur');
                 $get->groupBy('pms.kode');
                 $get->orderBy('pms.created_at','DESC');
-                $data = $get->paginate(10);
+                $data = $get->paginate(5);
         //return $data;
         return view('admin.booking',compact('data','request'));
     }
