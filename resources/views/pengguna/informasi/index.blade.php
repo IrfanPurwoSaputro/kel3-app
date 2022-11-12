@@ -13,30 +13,18 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            {{-- <div class="row justify-content-center mb-5">
-                <div class="col-md-8">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control"
-                            aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button" id="button-addon2">Cari</button>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-        </div>
+ 
         <div class="container">
             <div class="row">
                
                 @foreach ($informasi as $data)
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="card">
-                        <img src="{{ asset('images/ga.png') }}" class="card-img-top" alt="...">
+                        <img src="{{ $data->gambar }}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title"><strong class="price_text">{{ $data['judul'] }}</strong></h5>
-                            <p class="card-text text-secondary">{{ $data['tgl'] }}</p>
-                            <a href="/detail_informasi/{{ $data['slug'] }}" class="text-primary">Lihat Detail</a>
+                            <h5 class="card-title"><strong class="price_text">{{ $data->judul }}</strong></h5>
+                            <p class="card-text text-secondary">{{ \Carbon\Carbon::parse($data->created_at)->format('d F Y'); }}</p>
+                            <a href="/detail_informasi/{{ $data->id_informasi }}" class="text-primary">Lihat Detail</a>
                         </div>
                     </div>
                 </div>     

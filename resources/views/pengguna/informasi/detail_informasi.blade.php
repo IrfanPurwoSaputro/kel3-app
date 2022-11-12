@@ -16,9 +16,9 @@
             <div class="row justify-content-center mb-5">
                 <div class="col-xl-12 col-lg-12 col-md-12 mb-4">
                     <div>
-                        <img src="{{ asset('images/ga.png') }}" class="card-img-top" alt="...">
+                        <img src="{{ $gambar }}" class="card-img-top" alt="...">
                         <p class="text-black text-justify">
-                            {{ $isi }}
+                            <?php echo $isi?>
                         </p>
                     </div>
                 </div>

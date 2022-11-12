@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
+use Carbon\Carbon;
 class HomeController extends Controller
 {
     /**
@@ -122,70 +123,27 @@ class HomeController extends Controller
 
     public function about()
     {
-        $data = [
-            [
-                "judul" => "Kabar Gembira! Macan Tutul Belum Punah",
-                "slug" => "Kabar-Gembira!-Macan-Tutul-Belum-Punah",
-                "isi" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit impedit et dolores neque vitae laboriosam in inventore necessitatibus, autem consequuntur asperiores officia voluptates harum! Quisquam, ad. Quisquam quam porro asperiores aut deleniti nostrum, tempore voluptatibus quaerat ipsam atque. Est molestiae porro nesciunt, sequi explicabo possimus officiis libero cupiditate incidunt corporis sapiente, dolores similique error ducimus earum maiores totam modi! Sit rem reprehenderit unde ut temporibus. Cumque aut neque ad sed error, quibusdam dolore beatae omnis iure laborum eum, eveniet officia accusantium laudantium in ipsam dignissimos odio ipsa sequi commodi atque voluptatibus nihil? Excepturi fuga magni, expedita tempora tenetur repudiandae libero.",
-                "tgl" => "Madiun, 11 Sep 2022" 
-            ],
-            [
-                "judul" => "Sensasi lebaran di lawu",
-                "slug" => "Sensasi-lebaran-di-lawu",
-                "isi" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit impedit et dolores neque vitae laboriosam in inventore necessitatibus, autem consequuntur asperiores officia voluptates harum! Quisquam, ad. Quisquam quam porro asperiores aut deleniti nostrum, tempore voluptatibus quaerat ipsam atque. Est molestiae porro nesciunt, sequi explicabo possimus officiis libero cupiditate incidunt corporis sapiente, dolores similique error ducimus earum maiores totam modi! Sit rem reprehenderit unde ut temporibus. Cumque aut neque ad sed error, quibusdam dolore beatae omnis iure laborum eum, eveniet officia accusantium laudantium in ipsam dignissimos odio ipsa sequi commodi atque voluptatibus nihil? Excepturi fuga magni, expedita tempora tenetur repudiandae libero.",
-                "tgl" => "Madiun, 11 Sep 2022"
-            ],
-            [
-                "judul" => "Gunung Lawu Ditutup Sementara",
-                "slug" => "Gunung-Lawu-Ditutup-Sementara",
-                "isi" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit impedit et dolores neque vitae laboriosam in inventore necessitatibus, autem consequuntur asperiores officia voluptates harum! Quisquam, ad. Quisquam quam porro asperiores aut deleniti nostrum, tempore voluptatibus quaerat ipsam atque. Est molestiae porro nesciunt, sequi explicabo possimus officiis libero cupiditate incidunt corporis sapiente, dolores similique error ducimus earum maiores totam modi! Sit rem reprehenderit unde ut temporibus. Cumque aut neque ad sed error, quibusdam dolore beatae omnis iure laborum eum, eveniet officia accusantium laudantium in ipsam dignissimos odio ipsa sequi commodi atque voluptatibus nihil? Excepturi fuga magni, expedita tempora tenetur repudiandae libero.",
-                "tgl" => "Madiun, 11 Sep 2022"
-            ]
-        ];
+        $data = DB::table('informasi')->orderBy('created_at','DESC')->get();
         return view('pengguna.informasi.index',[
             "informasi" => $data
         ]);
     }
 
-    public function detail_informasi($slug)
+    public function detail_informasi($id)
     {
-        $data = [
-            [
-                "judul" => "Kabar Gembira! Macan Tutul Belum Punah",
-                "slug" => "Kabar-Gembira!-Macan-Tutul-Belum-Punah",
-                "isi" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit impedit et dolores neque vitae laboriosam in inventore necessitatibus, autem consequuntur asperiores officia voluptates harum! Quisquam, ad. Quisquam quam porro asperiores aut deleniti nostrum, tempore voluptatibus quaerat ipsam atque. Est molestiae porro nesciunt, sequi explicabo possimus officiis libero cupiditate incidunt corporis sapiente, dolores similique error ducimus earum maiores totam modi! Sit rem reprehenderit unde ut temporibus. Cumque aut neque ad sed error, quibusdam dolore beatae omnis iure laborum eum, eveniet officia accusantium laudantium in ipsam dignissimos odio ipsa sequi commodi atque voluptatibus nihil? Excepturi fuga magni, expedita tempora tenetur repudiandae libero.",
-                "tgl" => "Madiun, 11 September 2022" 
-            ],
-            [
-                "judul" => "Sensasi lebaran di lawu",
-                "slug" => "Sensasi-lebaran-di-lawu",
-                "isi" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit impedit et dolores neque vitae laboriosam in inventore necessitatibus, autem consequuntur asperiores officia voluptates harum! Quisquam, ad. Quisquam quam porro asperiores aut deleniti nostrum, tempore voluptatibus quaerat ipsam atque. Est molestiae porro nesciunt, sequi explicabo possimus officiis libero cupiditate incidunt corporis sapiente, dolores similique error ducimus earum maiores totam modi! Sit rem reprehenderit unde ut temporibus. Cumque aut neque ad sed error, quibusdam dolore beatae omnis iure laborum eum, eveniet officia accusantium laudantium in ipsam dignissimos odio ipsa sequi commodi atque voluptatibus nihil? Excepturi fuga magni, expedita tempora tenetur repudiandae libero.",
-                "tgl" => "Madiun, 09 Maret 2022"
-            ],  
-            [
-                "judul" => "Gunung Lawu Ditutup Sementara",
-                "slug" => "Gunung-Lawu-Ditutup-Sementara",
-                "isi" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit impedit et dolores neque vitae laboriosam in inventore necessitatibus, autem consequuntur asperiores officia voluptates harum! Quisquam, ad. Quisquam quam porro asperiores aut deleniti nostrum, tempore voluptatibus quaerat ipsam atque. Est molestiae porro nesciunt, sequi explicabo possimus officiis libero cupiditate incidunt corporis sapiente, dolores similique error ducimus earum maiores totam modi! Sit rem reprehenderit unde ut temporibus. Cumque aut neque ad sed error, quibusdam dolore beatae omnis iure laborum eum, eveniet officia accusantium laudantium in ipsam dignissimos odio ipsa sequi commodi atque voluptatibus nihil? Excepturi fuga magni, expedita tempora tenetur repudiandae libero.",
-                "tgl" => "Madiun, 1 Februari 2022"
-            ]
-        ];
-        $judul = '';
-        $isi = '';
-        $tgl = '';
-       foreach($data as $d){
-           if($slug == $d['slug']){
-            $judul = $d['judul'];
-            $isi = $d['isi'];
-            $tgl = $d['tgl'];
-           }
-       }
-
+        $data = DB::table('informasi')->where('id_informasi',$id)->first();
+        if($data)
+        {   $tgl = Carbon::parse($data->created_at)->format('d F Y');
+            return view('pengguna.informasi.detail_informasi',[
+                "judul" => $data->judul,
+                "isi" => $data->isi,
+                "tgl" => $tgl,
+                'gambar'=>$data->gambar
+            ]);
+        }  else{
+            return redirect('/');
+        } 
         
-        return view('pengguna.informasi.detail_informasi',[
-            "judul" => $judul,
-            "isi" => $isi,
-            "tgl" => $tgl
-        ]);
     }
 
     public function contact()
