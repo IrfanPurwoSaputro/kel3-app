@@ -31,10 +31,12 @@
                           <th>No</th>
                           <th>Kode</th>
                           <th>Jalur</th>
-                          <th>Nama Anggota</th>
+                          <th>Nama Ketua</th>
                           <th>Tanggal Naik</th>
                           <th>Grand Total</th>
-                          <th>Status</th>
+                          
+                            <th>Status</th>
+                          
                         </tr>
                       </thead>
                       <tbody>
@@ -46,7 +48,9 @@
                           <td>{{$item->nama_anggota}}</td>
                           <td>{{\Carbon\Carbon::parse($item->created_at)->format('d F Y')}}</td>
                           <td>Rp{{number_format($item->total_harga, 0, ",", ".")}}</td>
+                          
                           <td>
+                          @if(Auth::user()->role == 'admin')
                             @if($item->status == 'belum dibayar')
                             <a class="badge badge-danger btn-sm">{{ucwords($item->status)}}</a>
                             <a class="badge badge-success btn-sm" 
@@ -57,12 +61,14 @@
                             @else
                             <a class="badge badge-success btn-sm">{{ucwords(str_replace('_',' ',$item->status))}}</a>
                             @endif
+                          @endif
                             <a class="badge badge-info btn-sm" type="button" 
                                     data-toggle="modal" data-target="#myModal"
-                                    onclick="getDetail('<?php echo $item->id_pemesanan?>')">
+                                    onclick="getDetail('<?php echo $item->kode?>')">
                               <i class="fa fa-eye"></i> Detail
                             </a>
                           </td>
+                        
                         </tr>
                       @endforeach
                       </tbody>
@@ -114,7 +120,7 @@ function getDetail(id)
         dataType: 'json',
           success: function (data) {
             $('#proses_data').hide();
-            $('#konten_body').append(data);
+            $('#konten_body').append(data.html);
           },
           error: function (data) {
             console.log('Error:', data);

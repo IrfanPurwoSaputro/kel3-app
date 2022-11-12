@@ -1,4 +1,21 @@
  <!-- header inner -->
+ <style>
+        .cts {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 13px;
+        margin: 4px 2px;
+        cursor: pointer;
+        }
+
+        .button1 {border-radius: 2px;}
+        .button2 {border-radius: 4px;}
+</style>
  <div class="header_main">
     <div class="header_main">
         <div class="container">
@@ -24,10 +41,12 @@
                                     <li class="mb-3 ml-3">
                                         <form action="/find_code" method="GET" enctype="multipart/form-data">
                                             <input type="text" class="form-control-md" name="cari" style="width: 200px" placeholder="Cek kode booking">
-                                            {{-- <button class="btn btn-warning btn-sm" type="button" id="button-addon2">Cari</button> --}}
                                             <input type="submit" value="kirim" class="btn btn-warning btn-sm" type="button" id="button-addon2">
                                         </form>
+                                        <!-- <button class="btn btn-info btn-sm" id="button-addon2"><a href="{{url('admin/login')}}" >Admin</a></button>
+                                        <button class="btn btn-success btn-sm" id="button-addon2"><a href="{{url('admin/login')}}" >Petugas</a></button> -->
                                     </li>
+                                    
                                 </ul>
                             </nav>
                         </div>
