@@ -9,7 +9,10 @@
         </button>
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
-            <strong>SIBOLU - SISTEM INFORMASI BOOKING GUNUNG LAWU</strong>
+            <strong style="text-transform: capitalize;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: #010101;">SIBOLU - SISTEM INFORMASI BOOKING GUNUNG LAWU</strong>
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
