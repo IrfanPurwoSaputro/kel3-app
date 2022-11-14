@@ -9,6 +9,9 @@ use App\Models\Cities;
 use App\Models\Pemesanan;
 use App\Models\Anggota;
 use Illuminate\Http\Response;
+use PDF;
+use DB;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -211,7 +214,35 @@ class OrderController extends Controller
  
         $hasil = Pemesanan::where('kode','=', $cari)->get();
 
-        // mengirim data pegawai ke view index
-        return view('pengguna.pemesanan.find_code', compact('hasil'));
+        if (!empty($hasil)) {
+            // dd($hasil);
+            return view('pengguna.pemesanan.find_code', compact('hasil'));
+        } else {
+            return redirect()->back()->with('alert', 'Kode Booking tidak ditemukan!');
+        }
+
+    }
+
+    public function get_pdf($id){
+        $data = DB::table('pemesanan as pms')
+                ->join('anggota as aga','aga.pemesanan_id','=','pms.id_pemesanan')
+                ->join('jalur as jur','jur.id_jalur','=','pms.jalur_id')
+                ->join('indonesia_provinces as ip','ip.id','=','aga.provinsi_id')
+                ->join('indonesia_cities as ics','ics.id','=','aga.kabupaten_id')
+                ->select('pms.*','aga.*','jur.nama as nama_jalur', 'ip.name as nama_provinsi','ics.name as nama_kabupaten')
+                ->where('pms.id_pemesanan','=',$id);
+
+        $anggota = $data->get();
+        $ketua = $data->where('aga.email','!=',NULL)->get();
+        // dd($anggota);
+        
+        $pdf = PDF::loadview('pengguna.pemesanan.cetak_pdf',['anggota'=>$anggota, 'ketua'=>$ketua]);
+        
+        foreach ($ketua as $key=> $value ){
+            $row = (object) $value;
+            $kode = $row->kode;
+
+        }    
+        return $pdf->download('Bukti Booking Online-'.$kode);
     }
 }

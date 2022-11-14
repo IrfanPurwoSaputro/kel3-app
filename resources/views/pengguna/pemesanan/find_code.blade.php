@@ -20,40 +20,52 @@
                         <div class="card-body">
                             <table class="table" id="userList">
                                 @foreach($hasil as $hl)
-                                @if($hasil == null)
-                                <thead>
-                                    <th scope="col">
-                                        <h4>Kode Booking Salah</h4>
-                                        <p>Data tidak dtemukan</p>
-                                    </th>
-                                </thead>
-                                @else
-                                <thead>
-                                    <th scope="col">Status</th>
-                                    {{-- <th scope="col">Kebangsaan</th> --}}
-                                    <th scope="col" class="">: {{ $hl->status }}</th>
-                                </thead>
-                                <thead>
-                                    <th scope="col">Bank Tujuan</th>
-                                    {{-- <th scope="col">Kebangs    aan</th> --}}
-                                    <th scope="col">: Bank {{ $hl->pembayaran }}</th>
-                                </thead>
-                                <thead>
-                                    <th scope="col">Virtual Account Number</th>
-                                    {{-- <th scope="col">Kebangsaan</th> --}}
-                                    <th scope="col">: 123456789</th>
-                                </thead>
-                                <thead>
-                                    <th scope="col">Kode Booking</th>
-                                    {{-- <th scope="col">Kebangsaan</th> --}}
-                                    <th scope="col">: {{ $hl->kode }}</th>
-                                </thead>
-                                <thead>
-                                    <th scope="col">Total Pembayaran</th>
-                                    {{-- <th scope="col">Kebangsaan</th> --}}
-                                    <th scope="col">: Rp. {{ $hl->total_harga }}</th>
-                                </thead>
-                                @endif
+                                    @if(is_null($hl))
+                                        <thead>
+                                            <th scope="col">
+                                                <h4>Kode Booking Salah</h4>
+                                                <p>Data tidak dtemukan</p>
+                                            </th>
+                                        </thead>
+                                    @else
+                                        <thead>
+                                            <th scope="col">Status</th>
+                                            @if ($hl->status == 'belum dibayar')
+                                                <th scope="col">
+                                                    : <i class="badge badge-danger  btn-sm">{{ucwords($hl->status)}}</i>
+                                                </th>
+                                            @else
+                                                <th scope="col">
+                                                    : <i class="badge badge-success btn-sm">{{ucwords(str_replace('_',' ',$hl->status))}}</i>
+                                                </th>
+                                            @endif
+                                        </thead>
+                                        <thead>
+                                            <th scope="col">Bank Tujuan</th>
+                                            {{-- <th scope="col">Kebangs    aan</th> --}}
+                                            <th scope="col">: Bank {{ $hl->pembayaran }}</th>
+                                        </thead>
+                                        <thead>
+                                            <th scope="col">Virtual Account Number</th>
+                                            <th scope="col">: 123456789</th>
+                                        </thead>
+                                        <thead>
+                                            <th scope="col">Kode Booking</th>
+                                            <th scope="col">: {{ $hl->kode }}</th>
+                                        </thead>
+                                        <thead>
+                                            <th scope="col">Total Pembayaran</th>
+                                            <th scope="col">: Rp. {{ $hl->total_harga }}</th>
+                                        </thead>
+                                        <thead>
+                                            @if ($hl->status == 'sudah_dibayar')
+                                                <th scope="col">Bukti Pembayaran</th>
+                                                <th scope="col">
+                                                    :  <a href="{{url('get_document/'.$hl->id_pemesanan)}}" style="color: blue">Lihat Bukti Booking</a>
+                                                </th>   
+                                            @endif
+                                        </thead>
+                                    @endif
                                 @endforeach
                             </table>
                         </div>

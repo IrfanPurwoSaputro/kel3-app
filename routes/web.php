@@ -41,6 +41,8 @@ Route::post('/store_prov', [OrderController::class,'store_provinces']);
 
 Route::get('/payment', [OrderController::class,'payment']);
 
+Route::get('/get_document/{id}', [OrderController::class,'get_pdf']);
+
 
 
 Route::get('/template/charts', [PageController::class, 'charts']);

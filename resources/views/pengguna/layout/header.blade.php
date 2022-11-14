@@ -36,8 +36,8 @@
                                 <ul class="menu-area-main">
                                     <li><a class="{{ Request::path() === '/' ? 'text-white' : '' }}" href="{{ url('/') }}">Beranda</a></li>
                                     <li><a class="{{ Request::path() === 'about' ? 'text-white' : '' }}" href="{{ url('about') }}">Informasi</a></li>
-                                    <li><a class="{{ Request::path() === 'booking' ? 'text-white' : '' }}" href="{{ url('booking') }}" href="{{ url('booking') }}">Pemesanan</a></li>
-                                    <li><a class="{{ Request::path() === 'pengaduan' ? 'text-white' : '' }}" href="{{ url('pengaduan') }}" href="{{ url('contact') }}">Pengaduan</a></li>
+                                    <li><a class="{{ Request::path() === 'booking' ? 'text-white' : '' }}" href="{{ url('booking') }}">Pemesanan</a></li>
+                                    <li><a class="{{ Request::path() === 'pengaduan' ? 'text-white' : '' }}" href="{{ url('pengaduan') }}">Pengaduan</a></li>
                                     <li class="mb-3 ml-3">
                                         <form action="/find_code" method="GET" enctype="multipart/form-data">
                                             <input type="text" class="form-control-md" name="cari" style="width: 200px" placeholder="Cek kode booking">
