@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengaduan;
+use Alert;
 
 class PengaduanController extends Controller
 {
@@ -35,12 +36,11 @@ class PengaduanController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'nama' => 'required',
-        //     'kode' => 'required',
-        //     'no_telepon' => 'required',
-        //     'pesan' => 'required'
-        // ]);
+        $this->validate($request, [
+            'nama' => 'required',
+            'no_telepon' => 'required',
+            'pesan' => 'required'
+        ]);
 
         $pengaduan = new Pengaduan();
         $pengaduan->nama = $request->nama;
@@ -50,7 +50,6 @@ class PengaduanController extends Controller
         $pengaduan->save();
 
         // return $request->input();
-
         return redirect('/pengaduan');
     }
 

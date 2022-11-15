@@ -19,7 +19,7 @@
             <div class="row pb-5 justify-content-center">
                 <div class="col-md-9">
                     <div class="email_btn">
-                        <form method="POST" action="{{ route('pengaduan.store') }}">
+                        <form method="POST" action="{{ route('pengaduan.store') }}" id="form_pengaduan">
                             @csrf
                             <div class="form-group">
                                 <input type="text" style="color: black" class="form-control form-control-sm" placeholder="Nama" name="nama">
@@ -42,4 +42,15 @@
             </div>
         </div>
     </div>
+
+    {{-- <script>
+        $('#form_pengaduan').on('submit', function(e) {
+            e.preventDefault();
+            swal(
+                'Success!',
+                'Pesan berhasil terkirim',
+                'success'
+            )
+        });
+    </script> --}}
 @endsection
