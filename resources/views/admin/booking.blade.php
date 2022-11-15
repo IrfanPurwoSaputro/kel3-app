@@ -34,9 +34,7 @@
                           <th>Nama Ketua</th>
                           <th>Tanggal Naik</th>
                           <th>Grand Total</th>
-                          
-                            <th>Status</th>
-                          
+                          <th>Status</th>
                         </tr>
                       </thead>
                       <tbody>

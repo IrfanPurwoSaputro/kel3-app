@@ -150,7 +150,9 @@ class AdminController extends Controller
                             ->where('aga.pemesanan_id',$data->id_pemesanan)
                             ->get();
            // $statusAnggota = 'Anggota';
+            $nol=0;
             foreach ($listAnggota as $key => $aga) {
+                $nol++;
                 if($aga->email != NULL)
                 {
                     $statusAnggota = 'Ketua';
@@ -158,16 +160,45 @@ class AdminController extends Controller
                     $statusAnggota = 'Anggota';
                 }
                 $bodyTwo .= '<div class="col-md-12">';
-                $bodyTwo .= '<p align="center"><b>Detail Anggota</b></p>
-                            <p>Nama Anggota : '.$aga->nama_anggota.' ( <b>'.$statusAnggota.' </b>)</p>
-                            <p>Kebangsaan : '.$aga->kebangsaan.'</p>
-                            <p>Asal : '.$aga->nama_provinsi.' '.$aga->nama_kabupaten.'</p>
-                            <p>Tanggal Lahir : '.Carbon::parse($aga->tanggal_lahir)->format('d F Y').'</p>
-                            <p>Jenis Identitas : '.$aga->jenis_identitas.'</p>
-                            <p>No Identitas : '.$aga->no_identitas.'</p>
-                            <p>Alamat  : '.$aga->alamat_rumah.'</p>
-                            <p>Email  : '.$aga->email.'</p>
-                            <p>No Telepon  : '.$aga->no_telepon.'</p>';
+                $bodyTwo .= '<p align="center"><b>Detail Anggota '.$nol.'</b></p>
+                            <table class="table align-middle table-row-dashed fs-6 gy-5">
+                                <tr>
+                                    <td style="padding-left: 2%">Nama Pendaki</td>
+                                     <td>:'.$aga->nama_anggota.' ( <b>'.$statusAnggota.' </b>)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">Kebangsaan</td>
+                                     <td>:'.$aga->kebangsaan.'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">Asal</td>
+                                    <td>:'.$aga->nama_provinsi.' '.$aga->nama_kabupaten.'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">Tanggal Lahir</td>
+                                     <td>:'.Carbon::parse($aga->tanggal_lahir)->format('d F Y').'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">Jenis Identitas</td>
+                                    <td>:'.$aga->jenis_identitas.'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">No Identitas</td>
+                                     <td>:'.$aga->no_identitas.'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">Alamat</td>
+                                    <td>:'.$aga->alamat_rumah.'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">Email</td>
+                                   <td>:'.$aga->email.'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">No Telepon</td>
+                                    <td>:'.$aga->no_telepon.'</td>
+                                </tr>
+                            </table>';
                 $bodyTwo .= '</div>';
             }
             
@@ -175,13 +206,36 @@ class AdminController extends Controller
             $html .= '<div class="row">';
             $bodyOne .= '<div class="col-md-12">';
             $bodyOne .= '<p align="center"><b>Detail Pemesanan</b></p>
-                         <p>Jalur Pendakian : '.$data->nama_jalur.' <br> '.$data->deskripsi.'</p>
-                         <p>Tanggal Naik : '.Carbon::parse($data->tanggal_naik)->format('d F Y').'</p>
-                         <p>Tanggal Turun : '.Carbon::parse($data->tanggal_turun)->format('d F Y').'</p>
-                         <p>Tanggal Booking : '.Carbon::parse($data->created_at)->format('d F Y').'</p>
-                         <p>Grand Total : '.number_format($data->total_harga, 0, ",", ".").'</p>
-                         <p>Metode Pembayaran : '.$data->pembayaran.'</p>
-                         <p>Status Booking : '.$status.'</p>';
+                         <table class="table align-middle table-row-dashed fs-6 gy-5">
+                                <tr>
+                                    <td style="padding-left: 2%">Jalur Pendakian </td>
+                                     <td>:'.$data->nama_jalur.' <br> '.$data->deskripsi.'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">Tanggal Naik</td>
+                                     <td>:'.Carbon::parse($data->tanggal_naik)->format('d F Y').'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">Tanggal Turun</td>
+                                    <td>:'.Carbon::parse($data->tanggal_turun)->format('d F Y').'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">Tanggal Booking</td>
+                                     <td>:'.Carbon::parse($data->created_at)->format('d F Y').'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">Grand Total</td>
+                                    <td>:'.number_format($data->total_harga, 0, ",", ".").'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">Metode Pembayaran</td>
+                                    <td>:'.$data->pembayaran.'</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 2%">Status Booking</td>
+                                     <td>:'.$status.'</td>
+                                </tr>
+                            </table>';
             $bodyOne .= '</div>';
             $html .= $bodyOne;
             $html .= $bodyTwo;

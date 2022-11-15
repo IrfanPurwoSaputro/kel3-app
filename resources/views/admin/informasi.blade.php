@@ -41,7 +41,7 @@
                           <th>Judul</th>
                           <!-- <th>Isi</th> -->
                           <th>Gambar</th>
-                          <th>#</th>
+                          <th>Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
