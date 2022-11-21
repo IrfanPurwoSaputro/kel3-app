@@ -20,7 +20,7 @@
                                         Tengah dan Jawa Timur. Gunung Lawu terletak di antara tiga kabupaten yaitu Kabupaten
                                         Karanganyar, Jawa Tengah, Kabupaten Ngawi, dan Kabupaten Magetan, Jawa Timur.</p>
                                     {{-- <a class="btn btn-lg btn-primary" href="#" role="button">Masuk</a> --}}
-                                    <a class="btn btn-lg btn-primary" href="/booking" role="button">Registrasi</a>
+                                    {{-- <a class="btn btn-lg btn-primary" href="/booking" role="button">Registrasi</a> --}}
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -40,7 +40,7 @@
                                     <p>Pada website ini sudah dilengkapi dengan tata cara pemesanan tiket dan juga informasi
                                         mengenai jalur yang bisa dilewati oleh para pendaki</p>
                                     {{-- <a class="btn btn-lg btn-primary" href="#" role="button">Masuk</a> --}}
-                                    <a class="btn btn-lg btn-primary" href="/booking" role="button">Registrasi</a>
+                                    {{-- <a class="btn btn-lg btn-primary" href="/booking" role="button">Registrasi</a> --}}
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -60,7 +60,7 @@
                                     <p>Website ini juga dilengkapi halaman pengaduan, sehingga kami bisa terus memperbarui
                                         sistem sesuai kebutuhan para pendaki</p>
                                     {{-- <a class="btn btn-lg btn-primary" href="#" role="button">Masuk</a> --}}
-                                    <a class="btn btn-lg btn-primary" href="/booking" role="button">Registrasi</a>
+                                    {{-- <a class="btn btn-lg btn-primary" href="/booking" role="button">Registrasi</a> --}}
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -146,7 +146,7 @@
                                         pada hari dan jam kerja. Sehingga disarankan untuk melakukan booking dan pembayaran
                                         dilakukan jauh hari sebelum tanggal keberangkatan.</p>
                                     <div class="btn_main">
-                                        <a class="btn btn-lg btn-primary" href="#" role="button">Pesan</a>
+                                        <a class="btn btn-lg btn-primary" href="{{ url('booking') }}" role="button">Pesan</a>
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +272,7 @@
     <!-- end Our  Clients -->
     <!-- start Contact Us-->
 
-    <div id="plant" class="contact_us layout_padding">
+    {{-- <div id="plant" class="contact_us layout_padding">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 ">
@@ -283,9 +283,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    <div class="contact_us_2 layout_padding paddind_bottom_0">
+    {{-- <div class="contact_us_2 layout_padding paddind_bottom_0">
         <div class="container">
             <div class="row pb-5 justify-content-center">
                 <div class="col-md-9">
@@ -313,5 +313,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

@@ -7,7 +7,7 @@
                     <div class="titlepage">
                         <h2 style="text-align: center; margin-top: 145px;">Form Aduan <strong
                                 style="color: #111315;">Masyarakat</strong></h2>
-                        <span style="text-align: center;">Identitas pelapor dijamin kerahasiaannya</span>
+                        {{-- <span style="text-align: center;">Identitas pelapor dijamin kerahasiaannya</span> --}}
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="submit_btn">
                                 <input type="submit" name="submit" class="btn btn-warning" value="Kirim" style="width: 150px;">
-                            </div>
+                            </div>p
                         </form>
                     </div>
                 </div>

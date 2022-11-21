@@ -18,6 +18,10 @@ class PengaduanController extends Controller
         return view('pengguna.pengaduan.index');
     }
 
+    public function konfirm(){
+        return view('pengguna.pengaduan.konfirmasi_aduan');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -50,7 +54,7 @@ class PengaduanController extends Controller
         $pengaduan->save();
 
         // return $request->input();
-        return redirect('/pengaduan');
+        return redirect('/konfirmasi_pengaduan');
     }
 
     /**

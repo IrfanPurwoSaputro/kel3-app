@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 use PDF;
 use DB;
 use Carbon\Carbon;
+use DateTime;
 
 class OrderController extends Controller
 {
@@ -62,105 +63,129 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'jalur_pendakian' => 'required',
-        //     'tanggal_naik' => 'required',
-        //     'tanggal_turun' => 'required',
-        //     'nama' => 'required',
-        //     'jenis_kelamin' => 'required',
-        //     'tanggal_lahir' => 'required',
-        //     'jenis_identitas' => 'required',
-        //     'no_identitas' => 'required',
-        //     'alamat_rumah' => 'required',
-        //     'provinsi' => 'required',
-        //     'kabupaten' => 'required',
-        //     'no_telepon' => 'required',
-        //     'email' => 'required',
-        //     'surat_sehat'     => 'required|image|mimes:pdf,svg|max:2048',
-        //     'pembayaran' => 'required',
-        //     'modal_nama' => 'required',
-        //     'modal_jenis_kelamin' => 'required',
-        //     'modal_tanggal_lahir' => 'required',
-        //     'modal_jenis_identitas' => 'required',
-        //     'modal_no_identitas' => 'required',
-        //     'modal_alamat_rumah' => 'required',
-        //     'modal_provinsi' => 'required',
-        //     'modal_kabupaten' => 'required',
-        //     'modal_no_telepon' => 'required',
-        //     'total_harga' => 'required',
-        // ]);
+        $this->validate($request, [
+            'jalur_pendakian' => 'required',
+            'tanggal_naik' => 'required',
+            'tanggal_turun' => 'required',
+            'nama' => 'required|alpha',
+            'jenis_kelamin' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_identitas' => 'required',
+            'no_identitas' => 'required|numeric|min:12',
+            'alamat_rumah' => 'required',
+            'provinsi' => 'required',
+            'kabupaten' => 'required',
+            'no_telepon' => 'required',
+            'email' => 'required',
+            'surat_sehat'     => 'required|mimes:pdf,svg|max:2048',
+            'pembayaran' => 'required',
+            // 'modal_nama' => 'alpha',
+            // 'modal_jenis_kelamin' => 'required',
+            // 'modal_tanggal_lahir' => 'required',
+            // 'modal_jenis_identitas' => 'required',
+            // 'modal_no_identitas' => 'required|numeric|min:12',
+            // 'modal_alamat_rumah' => 'required',
+            // 'modal_provinsi' => 'required',
+            // 'modal_kabupaten' => 'required',
+            // 'modal_no_telepon' => 'required|numeric|digits_between:10,13',
+            // 'total_harga' => 'required',
+        ]);
 
-        $current = Pemesanan::orderBy('id_pemesanan', 'desc')->first();
-        
-        if ($current == null) {
-            $angka = 0;
-            $angka += 1;
+        $date2=date("d-m-Y");
+
+        $date1=new DateTime($request->tanggal_lahir);
+        $date2=new DateTime($date2);
+
+        $interval = $date1->diff($date2);
+
+        $myage= $interval->y;
+
+        $html = '';
+        $alert = '';
+
+        if ($myage < 12){
+
+            // $jalur = Jalur::all();
+            // $provinces = Provinces::all();
+            // $alert.="<script>";
+            // $alert.="alert('Usia kurang dari 12 tahun')";
+            // $alert.="</script>";
+            // $html.=$alert;
+            return back()->withInput()->with('status', 'Usia minimal 12 tahun');
         }else {
-            $angka = $current->id_pemesanan;
-            $angka += 1;
-        }
-        $mydate=getdate(date("U"));
-        $bulan=$mydate['mon'];
-        $tahun=$mydate['year'];
-        $code = 'LAWU'.$bulan.$tahun.$angka;
-
-        $pemesanan = new Pemesanan();
-        $pemesanan->jalur_id = $request->jalur_pendakian;
-        $pemesanan->kode = $code;
-        $pemesanan->tanggal_naik = $request->tanggal_naik;  
-        $pemesanan->tanggal_turun = $request->tanggal_turun;
-        $pemesanan->status = 'belum dibayar';
-        $pemesanan->total_harga = $request->total_harga;
-        $pemesanan->pembayaran = $request->pembayaran;
-        $pemesanan->save();
-
-        $get_id = Pemesanan::orderBy('id_pemesanan', 'desc')->first();
-        $pemesanan_id = $get_id->id_pemesanan;
-
-        $surat_sehat = $request->file('surat_sehat');
-        $name = $request->file('surat_sehat')->getClientOriginalName();
-        if($surat_sehat){
-            $surat_sehat->move(public_path('document'),$name);
-        }
-
-        
-        $anggota = new Anggota();
-        $anggota->pemesanan_id = $pemesanan_id;
-        $anggota->nama = $request->nama;
-        $anggota->jenis_kelamin = $request->jenis_kelamin;
-        $anggota->tanggal_lahir = $request->tanggal_lahir;
-        $anggota->jenis_identitas = $request->jenis_identitas;
-        $anggota->no_identitas = $request->no_identitas;
-        $anggota->alamat_rumah = $request->alamat_rumah;
-        $anggota->provinsi_id = $request->provinsi;
-        $anggota->kabupaten_id = $request->kabupaten;
-        $anggota->no_telepon = $request->no_telepon;
-        $anggota->email = $request->email;
-        $anggota->surat_sehat = $name;
-        $anggota->save();
-        
-        if($request->userEntry != null){
-            foreach( $request->userEntry as $seq => $detail){
-                $row = (object) $detail;
-
-                $anggota = new Anggota();
-                $anggota->pemesanan_id = $pemesanan_id;
-                $anggota->nama = $row->modal_nama;
-                $anggota->jenis_kelamin = $row->modal_jenis_kelamin;
-                $anggota->tanggal_lahir = $row->modal_tanggal_lahir;
-                $anggota->jenis_identitas = $row->modal_jenis_identitas;
-                $anggota->no_identitas = $row->modal_no_identitas;
-                $anggota->alamat_rumah = $row->modal_alamat_rumah;
-                $anggota->provinsi_id = $row->modal_provinsi;
-                $anggota->kabupaten_id = $row->modal_kabupaten;
-                $anggota->no_telepon = $row->modal_no_telepon;
-                $anggota->save();
+            $current = Pemesanan::orderBy('id_pemesanan', 'desc')->first();
+            
+            if ($current == null) {
+                $angka = 0;
+                $angka += 1;
+            }else {
+                $angka = $current->id_pemesanan;
+                $angka += 1;
             }
+            $mydate=getdate(date("U"));
+            $bulan=$mydate['mon'];
+            $tahun=$mydate['year'];
+            $code = 'LAWU'.$bulan.$tahun.$angka;
+    
+            $pemesanan = new Pemesanan();
+            $pemesanan->jalur_id = $request->jalur_pendakian;
+            $pemesanan->kode = $code;
+            $pemesanan->tanggal_naik = $request->tanggal_naik;  
+            $pemesanan->tanggal_turun = $request->tanggal_turun;
+            $pemesanan->status = 'belum dibayar';
+            $pemesanan->total_harga = $request->total_harga;
+            $pemesanan->pembayaran = $request->pembayaran;
+            $pemesanan->save();
+    
+            $get_id = Pemesanan::orderBy('id_pemesanan', 'desc')->first();
+            $pemesanan_id = $get_id->id_pemesanan;
+    
+            $surat_sehat = $request->file('surat_sehat');
+            $name = $request->file('surat_sehat')->getClientOriginalName();
+            if($surat_sehat){
+                $surat_sehat->move(public_path('document'),$name);
+            }
+    
+            
+            $anggota = new Anggota();
+            $anggota->pemesanan_id = $pemesanan_id;
+            $anggota->nama = $request->nama;
+            $anggota->jenis_kelamin = $request->jenis_kelamin;
+            $anggota->tanggal_lahir = $request->tanggal_lahir;
+            $anggota->jenis_identitas = $request->jenis_identitas;
+            $anggota->no_identitas = $request->no_identitas;
+            $anggota->alamat_rumah = $request->alamat_rumah;
+            $anggota->provinsi_id = $request->provinsi;
+            $anggota->kabupaten_id = $request->kabupaten;
+            $anggota->no_telepon = $request->no_telepon;
+            $anggota->email = $request->email;
+            $anggota->surat_sehat = $name;
+            $anggota->save();
+            
+            if($request->userEntry != null){
+                foreach( $request->userEntry as $seq => $detail){
+                    $row = (object) $detail;
+    
+                    $anggota = new Anggota();
+                    $anggota->pemesanan_id = $pemesanan_id;
+                    $anggota->nama = $row->modal_nama;
+                    $anggota->jenis_kelamin = $row->modal_jenis_kelamin;
+                    $anggota->tanggal_lahir = $row->modal_tanggal_lahir;
+                    $anggota->jenis_identitas = $row->modal_jenis_identitas;
+                    $anggota->no_identitas = $row->modal_no_identitas;
+                    $anggota->alamat_rumah = $row->modal_alamat_rumah;
+                    $anggota->provinsi_id = $row->modal_provinsi;
+                    $anggota->kabupaten_id = $row->modal_kabupaten;
+                    $anggota->no_telepon = $row->modal_no_telepon;
+                    $anggota->save();
+                }
+            }
+    
+            // return $request->input();
+    
+            return redirect('/payment'); 
         }
 
-        // return $request->input();
-
-        return redirect('/payment'); 
     }
 
     /**

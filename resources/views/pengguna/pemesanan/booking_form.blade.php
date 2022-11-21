@@ -28,14 +28,23 @@
                                             <option value="{{ $jl->id_jalur }}">{{ $jl->nama}}</option>
                                         @endforeach
                                     </select>
+                                    @error('jalur_pendakian')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="tanggal_naik">Tanggal Berangkat</label>
                                     <input type="date" class="date form-control" name="tanggal_naik" id="tanggal_naik">
+                                    @error('tanggal_naik')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="tanggal_turun">Tanggal Pulang</label>
                                     <input type="date" class="date form-control" name="tanggal_turun" id="tanggal_turun">
+                                    @error('tanggal_turun')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 {{-- <div class="form-group">
                                     <label for="exampleFormControlSelect1">Jenis Kendaraan</label>
@@ -60,6 +69,9 @@
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
                                     <input type="text" class="form-control" name="nama" id="nama">
+                                    @error('nama')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 {{-- <div class="form-group">
                                     <label for="exampleFormControlSelect1">Kebangsaan</label>
@@ -72,10 +84,17 @@
                                         <option value="Laki-laki">Laki - Laki</option>
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
+                                    @error('jenis_kelamin')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="tanggal_lahir">Tanggal Lahir</label>
                                     <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir">
+                                    <p>Usia harus lebih dari 12 tahun</p>
+                                    @error('tanggal_lahir')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="jenis_identitas">Jenis Identitas</label>
@@ -85,14 +104,23 @@
                                         <option value="KTP">KTP</option>
                                         <option value="Passport">Passport</option>
                                     </select>
+                                    @error('jenis_identitas')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="no_identitas">Nomor Kartu Identitas</label>
                                     <input type="text" class="form-control" name="no_identitas" id="no_identitas">
+                                    @error('no_identitas')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat_rumah">Alamat Rumah</label>
                                     <input type="text" class="form-control" name="alamat_rumah" id="alamat_rumah">
+                                    @error('alamat_rumah')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="provinsi">Provinsi</label>
@@ -102,24 +130,39 @@
                                             <option value="{{ $prov->id }}">{{ $prov->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('provinsi')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="kabupaten">Kota/Kabupaten</label>
                                     <select class="form-control" style="height: 50px" name="kabupaten" id="kabupaten">
                                         {{-- <option value="">Pilih Kota</option> --}}
                                     </select>
+                                    @error('kabupaten')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="no_telepon">No. Telepon/HP</label>
                                     <input type="text" class="form-control" name="no_telepon" id="no_telepon">
+                                    @error('no_telepon')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="text" class="form-control" name="email" id="email">
+                                    @error('email')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="surat_sehat">Surat Kesehatan</label>
                                     <input type="file" class="form-control" name="surat_sehat" id="surat_sehat">
+                                    @error('surat_sehat')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -209,21 +252,30 @@
                         <div class="form-group">
                             <label>Nama</label>
                             <input type="text" class="form-control" name="modal_nama" id="modal_nama">
+                            @error('modal_nama')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         {{-- <div class="form-group">
                             <label>Kebangsaan</label>
                             <input type="text" class="form-control" name="kebangsaan" id="kebangsaan">
                         </div> --}}
                         <div class="form-group">
-                            <label>Jenis Kelamin</label>
+                            <label>Jenis Kelamin</label>    
                             <select class="form-control" style="height: 50px" name="modal_jenis_kelamin" id="modal_jenis_kelamin">
                                 <option value="Laki-laki">Laki - Laki</option>
                                 <option value="perempuan">Perempuan</option>
                             </select>
+                            @error('modal_jenis_kelamin')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Tanggal Lahir</label>
                             <input type="date" class="form-control" name="modal_tanggal_lahir" id="modal_tanggal_lahir">
+                            @error('modal_tanggal_lahir')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Jenis Identitas</label>
@@ -233,14 +285,23 @@
                                 <option value="KTP">KTP</option>
                                 <option value="Passport">Passport</option>
                             </select>
+                            @error('modal_jenis_identitas')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Nomor Kartu Identitas</label>
                             <input type="text" class="form-control" name="modal_no_identitas" id="modal_no_identitas">
+                            @error('modal_no_identitas')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Alamat Rumah</label>
                             <input type="text" class="form-control" name="modal_alamat_rumah" id="modal_alamat_rumah">
+                            @error('modal_alamat_rumah')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Provinsi</label>
@@ -250,16 +311,25 @@
                                         <option value="{{ $prov->id }}">{{ $prov->name }}</option>
                                     @endforeach
                             </select>
+                            @error('modal_provinsi')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Kota/Kabupaten</label>
                             <select class="form-control" style="height: 50px" name="modal_kabupaten" id="modal_kabupaten">
 
                             </select>
+                            @error('modal_kabupaten')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>No. Telepon/HP</label>   
                             <input type="text" class="form-control" name="modal_no_telepon" id="modal_no_telepon">
+                            @error('modal_no_telepon')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>  
                         {{-- <div class="form-group">
                             <label>Email</label>
@@ -371,12 +441,24 @@
                     day = '0' + day.toString();
                 
                 var maxDate = year + '-' + month + '-' + day;
-
-                // or instead:
-                // var maxDate = dtToday.toISOString().substr(0, 10);
-
-                $('.date').attr('min', maxDate);
+                $('#tanggal_naik').attr('min', maxDate);
+                var tgl_naik = $('#tanggal_naik').val()
+                $('#tanggal_turun').attr('min', tgl_naik);
             });
+
+            // var day = 12;
+            // var month = 12;
+            // var year = 2010;
+            // var age = 18;
+            // var setDate = new Date(year + age, month - 1, day);
+            // var currdate = $('#tanggal_lahir').val();
+
+            // if (currdate <= setDate) {
+            // // you are above 18
+            //     alert("below 12")
+            // }
+
+
 
             // $(function() {
             //     $.ajaxSetup({

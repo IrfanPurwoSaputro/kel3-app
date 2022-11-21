@@ -40,6 +40,8 @@ Route::get('/find_code', [OrderController::class,'find_code']);
 
 Route::resource('pengaduan', PengaduanController::class);
 
+Route::get('/konfirmasi_pengaduan', [PengaduanController::class, 'konfirm']);
+
 Route::post('/store_prov', [OrderController::class,'store_provinces']);
 
 Route::get('/payment', [OrderController::class,'payment']);
