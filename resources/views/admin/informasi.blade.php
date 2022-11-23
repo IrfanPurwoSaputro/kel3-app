@@ -8,7 +8,8 @@
       <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Daftar Informasi Gunung Lawu 
-                  &nbsp;  @if($message=Session::get('success'))
+                  &nbsp;  
+                  @if($message=Session::get('success'))
                     <div class="badge badge-success" role="alert">
                         <div class="alert-text">{{ucwords($message)}}</div>
                     </div>

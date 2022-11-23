@@ -29,6 +29,7 @@
                          <input type="file" name="gambar" class="file-upload-default" >
                          <input type="hidden" value="{{$data->gambar}}" name="old_gambar">
                       </div>
+                      <small style="color:red;">Format Gambar .jpg atau .png</small>
                       <small style="color:red;">Pilih gambar bila ada perubahan!</small>
                       <div class="form-group">
                         <label for="exampleTextarea1">Gambar Sekarang</label>

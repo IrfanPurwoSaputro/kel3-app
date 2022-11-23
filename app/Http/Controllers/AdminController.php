@@ -160,7 +160,7 @@ class AdminController extends Controller
                     $statusAnggota = 'Anggota';
                 }
                 $bodyTwo .= '<div class="col-md-12">';
-                $bodyTwo .= '<p align="center"><b>Detail Anggota '.$nol.'</b></p>
+                $bodyTwo .= '<p align="center"><b>Detail Pendaki '.$nol.'</b></p>
                             <table class="table align-middle table-row-dashed fs-6 gy-5">
                                 <tr>
                                     <td style="padding-left: 2%">Nama Pendaki</td>
@@ -302,6 +302,11 @@ class AdminController extends Controller
     public function storeInformasi(Request $request)
     {
         //dd($request->all());
+        $format = ['jpg','png'];
+        $ext = $request->file('gambar')->getClientOriginalExtension();
+        if(!in_array($ext,$format)){
+            return redirect()->back()->with('danger','Gagal menambahkan informasi format gambar diluar jpg atau png!');
+        }
         DB::table('informasi')->insert([
             'judul'=>$request->judul,
             'isi'=>$request->isi,
@@ -316,6 +321,11 @@ class AdminController extends Controller
         $gambar = $request->old_gambar;
         if($request->file('gambar')!=null)
         {
+            $format = ['jpg','png'];
+            $ext = $request->file('gambar')->getClientOriginalExtension();
+            if(!in_array($ext,$format)){
+                return redirect()->back()->with('danger','Gagal menambahkan informasi format gambar diluar jpg atau png!');
+            }
             $gambar = $this->uploadFile($request,'gambar');
         }
         DB::table('informasi')->where('id_informasi',$id)->update([

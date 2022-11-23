@@ -6,7 +6,11 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card">
-     
+      @if($message=Session::get('danger'))
+        <div class="badge badge-danger" role="alert">
+          <div class="alert-text">{{ucwords($message)}}</div>
+        </div>
+      @endif
         <div class="card-body">
         <h4 class="card-title">Penambahan Informasi Gunung Lawu
         </h4>
@@ -26,6 +30,7 @@
                       <div class="input-group col-xs-12">
                          <input type="file" name="gambar" class="file-upload-default" required>
                       </div>
+                      <small style="color:red;">Format Gambar .jpg atau .png</small>
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Tambah</button>
                     <a href="{{url('informasi_list')}}" class="btn btn-light">Batal</a>
