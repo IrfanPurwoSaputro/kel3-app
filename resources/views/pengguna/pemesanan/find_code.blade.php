@@ -24,7 +24,7 @@
                                         <thead>
                                             <th scope="col">
                                                 <h4>Kode Booking Salah</h4>
-                                                <p>Data tidak dtemukan</p>
+                                                <p>Data tidak ditemukan</p>
                                             </th>
                                         </thead>
                                     @else
@@ -32,7 +32,7 @@
                                             <th scope="col">Status</th>
                                             @if ($hl->status == 'belum dibayar')
                                                 <th scope="col">
-                                                    : <i class="badge badge-danger  btn-sm">{{ucwords($hl->status)}}</i>
+                                                    : <i class="badge badge-danger btn-sm">{{ucwords($hl->status)}}</i>
                                                 </th>
                                             @else
                                                 <th scope="col">
@@ -42,7 +42,7 @@
                                         </thead>
                                         <thead>
                                             <th scope="col">Bank Tujuan</th>
-                                            {{-- <th scope="col">Kebangs    aan</th> --}}
+                                            {{-- <th scope="col">Kebangsaan</th> --}}
                                             <th scope="col">: Bank {{ $hl->pembayaran }}</th>
                                         </thead>
                                         <thead>

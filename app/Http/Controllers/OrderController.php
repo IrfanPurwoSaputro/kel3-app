@@ -9,7 +9,7 @@ use App\Models\Cities;
 use App\Models\Pemesanan;
 use App\Models\Anggota;
 use Illuminate\Http\Response;
-use PDF;
+use PDF;    
 use DB;
 use Carbon\Carbon;
 use DateTime;
@@ -67,11 +67,11 @@ class OrderController extends Controller
             'jalur_pendakian' => 'required',
             'tanggal_naik' => 'required',
             'tanggal_turun' => 'required',
-            'nama' => 'required|alpha',
+            'nama' => 'required',
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required',
             'jenis_identitas' => 'required',
-            'no_identitas' => 'required|numeric|min:12',
+            'no_identitas' => 'required',
             'alamat_rumah' => 'required',
             'provinsi' => 'required',
             'kabupaten' => 'required',

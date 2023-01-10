@@ -337,7 +337,7 @@
                         </div> --}}
                         <div class="form-group">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-info">Save changes</button>
+                            <button type="submit" class="btn btn-info">Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -443,7 +443,7 @@
                 var maxDate = year + '-' + month + '-' + day;
                 $('#tanggal_naik').attr('min', maxDate);
                 var tgl_naik = $('#tanggal_naik').val()
-                $('#tanggal_turun').attr('min', tgl_naik);
+                $('#tanggal_turun').attr('min', maxDate);
             });
 
             // var day = 12;
